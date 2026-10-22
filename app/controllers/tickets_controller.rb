@@ -3,7 +3,6 @@ class TicketsController < ApplicationController
         tickets = Ticket.all
 
         render json: tickets, status: :ok
-
     end
 
     def create
@@ -12,7 +11,7 @@ class TicketsController < ApplicationController
         if tickets.save
             render json: tickets, status: :created
         else
-            render json: {errors: tickets.errors.full_messages},status: :unprocessable_entity
+            render json: { errors: tickets.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -26,7 +25,7 @@ class TicketsController < ApplicationController
         if tickets.update(ticket_params)
             render json: tickets, status: :ok
         else
-            render json: {errors: tickets.errors.full_messages}, status: :unprocessable_entity
+            render json: { errors: tickets.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -47,10 +46,9 @@ class TicketsController < ApplicationController
             :priority,
             :status
         )
-
     end
 
-    
+
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
     private
@@ -60,5 +58,4 @@ class TicketsController < ApplicationController
         error: "Ticket not found"
         }, status: :not_found
     end
-
 end
